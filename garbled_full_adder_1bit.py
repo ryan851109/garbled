@@ -25,6 +25,7 @@ class AESCrypto():
 def main():
 	key_table = ["","","","","","","","","","","","","","","",""]
 	secret = ["0","1"]
+	#random.seed(1)  use the seed to control the random table
 	for i in range(16):
 		key_table[i] = ''.join(random.choice(string.ascii_letters + string.digits) for x in range(14))
 		key_table[i] = key_table[i] + "00"
