@@ -1,4 +1,4 @@
-# garbled circuit with AND gate
+# garbled circuit with XOR gate
 from Crypto.Cipher import AES
 from binascii import b2a_hex,a2b_hex
 import random,string
