@@ -4,9 +4,16 @@ import random,string
 import numpy as np
 import time
 import AES_function as aes
+import os
 
+name = input("請輸入名字 : ")
+path = os.path.abspath('..') + '/' + name
+if not os.path.isdir(path) :
+	print('無此資料!!!')
+	name = input("請再輸入一次 : ")
+	path = os.path.abspath('..') + '/' + name
 garbled_table = []
-fp = open('feature_garbled_table.txt', "r")
+fp = open(path + '/' + 'feature_garbled_table.txt', "r")
 line = fp.readline()
 
 while line:
@@ -15,11 +22,11 @@ while line:
 fp.close()
 seed = input("請輸入seed : ")
 search = input("請輸入想要的特徵 : ")
-while len(search) > 10 :
+while len(search) > 1000 :
 	print("過長的特徵!!!")
 	search = input("請再次輸入想要的特徵 : ")
-if len(search) < 10 :
-	search = ''.join('0' for x in range(10-len(search))) + search
+if len(search) < 1000 :
+	search = ''.join('0' for x in range(1000-len(search))) + search
 garbled_circuit = []
 for i in range(len(garbled_table)) : 
 	garbled_circuit_content = []
@@ -59,7 +66,7 @@ compare_bit_end = time.time()
 #for i in range(10) :
 	#print(compare[i])
 print("計算時間 : " + str(compare_bit_end - compare_bit_start))
-f = open('compare_result.txt', 'w', encoding = 'UTF-8')
+f = open(path + '/' + 'compare_result.txt', 'w', encoding = 'UTF-8')
 for i in range(len(compare)):
 	f.write((compare[i]).decode() + '\n')
 f.close()

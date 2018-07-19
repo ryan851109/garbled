@@ -1,4 +1,13 @@
-f = open('counter.txt', 'r')
+import os
+
+name = input("請輸入名字 : ")
+path = os.path.abspath('..') + '/' + name
+if not os.path.isdir(path) :
+	print('無此資料!!!')
+	name = input("請再輸入一次 : ")
+	path = os.path.abspath('..') + '/' + name
+
+f = open(path + '/' + 'counter.txt', 'r')
 result = []
 line = f.readline()
 while line:
@@ -6,7 +15,7 @@ while line:
 	line = f.readline()
 f.close()
 #print(result)
-f = open('counter_key.txt', 'r')
+f = open(path + '/' + 'counter_key.txt', 'r')
 result_table = []
 line = f.readline()
 while line:

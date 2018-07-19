@@ -7,13 +7,21 @@ import time
 import math
 import counter_adder as AND
 import AES_function as aes
+import os
+
+name = input("請輸入名字 : ")
+path = os.path.abspath('..') + '/' + name
+if not os.path.isdir(path) :
+	print('無此資料!!!')
+	name = input("請再輸入一次 : ")
+	path = os.path.abspath('..') + '/' + name
 
 seed = input("請輸入seed : ")
 random.seed(int(seed))
 
 """讀取compare出來的結果"""
 compare_result = []
-f = open('compare_result.txt', 'r')
+f = open(path + '/' + 'compare_result.txt', 'r')
 line = f.readline()
 while line :
 	compare_result.append(line[0:-1])
@@ -33,6 +41,7 @@ for i in range(len(compare_result)) :
 	#print(key_table[i])
 
 """製作counter所需的key"""
+make_counter_start = time.time()
 counter_key = []
 counter = []
 for i in range(math.ceil(math.log(len(compare_result),2))+ 1) :
@@ -55,6 +64,7 @@ for i in range(math.ceil(math.log(len(compare_result),2))) :
 	carry_bit_garbled.append(AND.AND(counter_key[i],counter_key[i],counter_key[i+1],counter_key[i]).get_encrypt_secret())
 #for i in range(math.ceil(math.log(len(compare_result),2))) :
 	#print(carry_bit_garbled[i])
+make_counter_end = time.time()
 """counter start """
 carry = ""
 for i in range(len(compare_result)) :
@@ -79,14 +89,17 @@ for i in range(len(compare_result)) :
 					counter[j] = str(counter_bit_key.decrypt(carry_key.decrypt(carry_bit_garbled[j][k])))[18:34]
 			except :
 				continue
+count_end = time.time()
 	
 for i in range(math.ceil(math.log(len(compare_result),2))) :
 	print(counter[i])
-f = open('counter_key.txt', 'w', encoding = 'UTF-8')
+f = open(path + '/' + 'counter_key.txt', 'w', encoding = 'UTF-8')
 for i in range(len(counter_key)):
 	f.write(str(counter_key[i]) + '\n')
 f.close()
-f = open('counter.txt', 'w', encoding = 'UTF-8')
+f = open(path + '/' + 'counter.txt', 'w', encoding = 'UTF-8')
 for i in range(len(counter)):
 	f.write(str(counter[i]) + '\n')
 f.close()
+print("產生時間 : " + str(make_counter_end - make_counter_start))
+print("計算時間 : " + str(count_end - make_counter_end))
