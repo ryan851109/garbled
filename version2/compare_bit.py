@@ -56,6 +56,7 @@ for i in range(len(garbled_table)) :
 		every_key_table_content = []
 		for k in range(4) :
 			every_key_table_content.append(''.join(random.choice(string.ascii_letters + string.digits) for x in range(14)) + "00")
+		#print(every_key_table_content)
 		key_table_content.append(every_key_table_content)
 	key_table.append(key_table_content)
 #print(key_table)
