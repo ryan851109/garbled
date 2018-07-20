@@ -34,6 +34,20 @@ except :
 	print("No file!!!")
 	exit()
 
+new_file = False
+count = 0
+try :
+	f = open('feature_garbled_table.txt','r')
+	line = f.readline()
+	feature_length = len(line.split(','))
+	while line :
+		count = count + 1
+		line = f.readline()
+	f.close()
+except :
+	feature_length = 0
+	new_file = True
+
 #times = int(input("請輸入你的資料數 : "))
 times = len(file_content)
 seed = input("請輸入您的seed : ")
@@ -41,23 +55,35 @@ random.seed(int(seed))
 f0 = open('seed.txt','w',encoding = 'UTF-8')
 f0.write(seed)
 f0.close()
-feature_length = 0
+if not new_file :
+	for i in range(int(count*feature_length/2)) :
+		a = xor.xor("0")
+#print(str(count))
+#print(str(feature_length))
 #f1 = open(path + '/' + 'feature_garbled_table.txt', 'w', encoding = 'UTF-8')
-f1 = open('feature_garbled_table.txt', 'w', encoding = 'UTF-8')
+f1 = open('feature_garbled_table.txt', 'a', encoding = 'UTF-8')
 #f2 = open(path + '/' + 'key_table.txt', 'w', encoding = 'UTF-8')
 #f2 = open('key_table.txt', 'w', encoding = 'UTF-8')
 make_feature_garbled_table_time_start = time.time()
 for file_count in range(times) :
 	#feature = input("請輸入您的特徵 : ")
 	feature = file_content[file_count]
-	while (len(feature) > feature_length and file_count != 0) or len(feature) < 1: 
-		print("第"+str(file_count+1)+"筆特徵長度錯誤!!!")
-		exit()
-		#feature = input("請再輸入一次您的特徵 : ")
-	if file_count == 0 :
-		feature_length = len(feature)
-	if len(feature) < feature_length : 
-		feature = ''.join('0' for x in range(feature_length-len(feature))) + feature
+	if not new_file :
+		while len(feature) > (feature_length / 2) or len(feature) < 1: 
+			print("第"+str(file_count+1)+"筆特徵長度錯誤!!!")
+			exit()
+			#feature = input("請再輸入一次您的特徵 : ")
+		if len(feature) < (feature_length / 2) : 
+			feature = ''.join('0' for x in range(int(feature_length / 2)-len(feature))) + feature
+	else :
+		if (len(feature) > feature_length and file_count != 0) or len(feature) < 1:
+			print("第"+str(file_count+1)+"筆特徵長度錯誤!!!")
+			exit()
+			#feature = input("請再輸入一次您的特徵 : ")
+		if file_count == 0 :
+			feature_length = len(feature)
+		if len(feature) < feature_length :
+			feature = ''.join('0' for x in range(feature_length-len(feature))) + feature
 	feature_table = []
 	for i in range(len(feature)) :
 		feature_content = xor.xor(feature[len(feature)-i - 1])
