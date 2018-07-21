@@ -35,11 +35,11 @@ except :
 	exit()
 
 new_file = False
-count = 0
 try :
+	count = 0
 	f = open('feature_garbled_table.txt','r')
 	line = f.readline()
-	feature_length = len(line.split(','))
+	feature_length = len(line.split(', '))
 	while line :
 		count = count + 1
 		line = f.readline()
@@ -56,7 +56,7 @@ f0 = open('seed.txt','w',encoding = 'UTF-8')
 f0.write(seed)
 f0.close()
 if not new_file :
-	for i in range(int(count*feature_length/2)) :
+	for i in range(int(count*feature_length / 2)) :
 		a = xor.xor("0")
 #print(str(count))
 #print(str(feature_length))

@@ -23,14 +23,14 @@ while line :
 	line = line.replace('[','')
 	line = line.replace(']','')
 	line = line.replace('\n','')
-	line = line.split(',')
+	line = line.split(', ')
 	garbled_table_content = []
 	every_garbled_table_content = []
 	for i in range(len(line)) :
 		if i % 2 == 0 :
-			every_garbled_table_content.append((line[i][3:-1]).encode())
+			every_garbled_table_content.append((line[i][2:-1]).encode())
 		else :
-			every_garbled_table_content.append((line[i][3:-1]).encode())
+			every_garbled_table_content.append((line[i][2:-1]).encode())
 			garbled_table_content.append(every_garbled_table_content)
 			every_garbled_table_content = []
 	garbled_table.append(garbled_table_content)
@@ -66,7 +66,7 @@ write_compare = []
 for i in range(len(garbled_table)) :
 	search_key = []
 	for j in range(len(search)) :
-		if int(search[len(search) - i - 1]) == 0 :
+		if int(search[len(search) - j - 1]) == 0 :
 			search_key.append(key_table[i][j][0])
 		else :
 			search_key.append(key_table[i][j][1])
