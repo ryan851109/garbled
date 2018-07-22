@@ -1,5 +1,5 @@
-##This garbled circuit uses AES Crypto
-##The version is only to input one file. If you want input more file, you could go to the version2.
+## This garbled circuit uses AES Crypto
+## The version is only to input one file. If you want input more file, you could go to the version2.
 
 If you want to run the program :
 
@@ -19,15 +19,15 @@ If you want to run the encrypto-search model,you can follow the step :
 
 ==============================================
 
-##Explain the function :
+## Explain the function :
 
-###produce_feature_table.py :
+### produce_feature_table.py :
 
 >產生每筆特徵向量的garbled circuit
 
 >並儲存在一個名為"feature_garbled_table.txt"的文件裡
 
-###compare_bit.py :
+### compare_bit.py :
 
 >讀取"feature_garbled_table.txt"裡頭的資料
 
@@ -37,7 +37,7 @@ If you want to run the encrypto-search model,you can follow the step :
 
 >並儲存在一個名為"compare_result.txt"的文件裡
 
-###n_bit_counter_function.py :
+### n_bit_counter_function.py :
 
 >輸入原先產生garbled circuit的seed
 
@@ -47,7 +47,7 @@ If you want to run the encrypto-search model,you can follow the step :
 
 >並且此function內garbled circuit的key會儲存在一個名為"counter_key.txt"的文件裡
 
-###key_convert_number.py :
+### key_convert_number.py :
 
 >讀入"counter.txt"與"counter_key.txt"
 
