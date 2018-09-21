@@ -37,9 +37,10 @@ while line :
 	line = fp.readline()
 fp.close()
 #print(len(garbled_table))
-#seed = input("請輸入seed : ")
-fp = open('seed.txt', "r")
-random.seed(int(fp.readline()))
+seed = input("請輸入seed : ")
+#fp = open('seed.txt', "r")
+#random.seed(int(fp.readline()))
+random.seed(int(seed))
 search = input("請輸入想要的特徵 : ")
 while len(search) > len(garbled_table[0]) :
 	print("過長的特徵!!!")

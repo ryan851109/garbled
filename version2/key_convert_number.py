@@ -8,7 +8,11 @@ if not os.path.isdir(path) :
 	path = os.path.abspath('..') + '/' + name
 """
 #f = open(path + '/' + 'counter.txt', 'r')
-f = open('counter.txt', 'r')
+try :
+    f = open('counter.txt', 'r')
+except :
+    print("Wrong seed or can't finish privous action!!!")
+    exit()
 result = []
 line = f.readline()
 while line:

@@ -34,7 +34,15 @@ while line :
 	compare_result.append(every_compare_result)
 	line = f.readline()
 f.close()
-#print(len(compare_result))
+if compare_result[0][0] == "":
+    try :
+        os.remove(os.path.abspath('.') + "/counter.txt") 
+        os.remove(os.path.abspath('.') + "/counter_key.txt")
+    except :
+        print("error seed")
+        exit()
+    print("error seed")
+    exit()
 #print(len(compare_result[0]))
 #for i in range(10):
 	#print(compare_result[i])
